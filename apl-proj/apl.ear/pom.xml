@@ -10,6 +10,7 @@
   <groupId>uni7.apl.ear</groupId>
   <artifactId>apl.ear</artifactId>
   <name>apl.ear</name>
+  <packaging>ear</packaging>
   <build>
 		<plugins>
 			<plugin>
