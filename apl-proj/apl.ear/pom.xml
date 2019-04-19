@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>apl-proj</artifactId>
+    <groupId>uni7-proj</groupId>
+    <version>1.0</version>
+  </parent>
+
+  <groupId>uni7.apl.ear</groupId>
+  <artifactId>apl.ear</artifactId>
+  <name>apl.ear</name>
+  <build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<modules>
+						<ejbModule>
+							<groupId>uni7.apl.ejb</groupId>
+							<artifactId>apl.ejb</artifactId>
+							<bundleFileName>apl.ejb.jar</bundleFileName>
+						</ejbModule>
+						<webModule>
+							<groupId>uni7.apl.web</groupId>
+							<artifactId>apl.web</artifactId>
+							<bundleFileName>apl.web.war</bundleFileName>
+						</webModule>
+					</modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>uni7.apl.ejb</groupId>
+			<artifactId>apl.ejb</artifactId>
+			<version>1.0</version>
+			<type>ejb</type>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>uni7.apl.web</groupId>
+			<artifactId>apl.web</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+</project>

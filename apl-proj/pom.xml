@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>uni7-apl</groupId>
+  <groupId>uni7-proj</groupId>
   <artifactId>apl-proj</artifactId>
   <version>1.0</version>
   <name>apl-proj</name>
@@ -21,8 +21,8 @@
     </dependency>
   </dependencies>
   <modules>
-    <module>proj-ejb</module>
-    <module>proj-web</module>
-    <module>proj-ear</module>
+    <module>apl.ejb</module>
+    <module>apl.ear</module>
+    <module>apl.web</module>
   </modules>
 </project>
