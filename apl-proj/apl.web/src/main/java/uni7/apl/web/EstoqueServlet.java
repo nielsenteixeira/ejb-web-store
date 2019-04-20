@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-@WebServlet("/Estoque")
+@WebServlet("/EstoqueServlet")
 public class EstoqueServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
