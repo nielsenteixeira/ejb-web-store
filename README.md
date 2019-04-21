@@ -37,13 +37,13 @@ docker run -p 8080:8080 -p 9990:9990 -it apl.web
 To list product stock access this url:
 
 ```
-/apl.web/EstoqueServlet?acao=listar
+http://localhost:8080/apl.web/EstoqueServlet?acao=listar
 ```
 
 This url will return html format as default, but if you prefer **JSON format** just add '&formato=json':
 
 ```
-/apl.web/EstoqueServlet?acao=listar&formato=json
+http://localhost:8080/apl.web/EstoqueServlet?acao=listar&formato=json
 ```
 JSON return:
 ```JSON
