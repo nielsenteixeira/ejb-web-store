@@ -73,3 +73,18 @@ JSON return:
 ```
 
 The parameter 'formato' can be: _html_ or _json_
+
+To list cart access this url:
+
+```
+http://localhost:8080/apl.web/CarrinhoServlet?acao=listar
+```
+
+To add an item into cart access this url:
+
+```
+http://localhost:8080/apl.web/CarrinhoServlet?acao=adicionar&produto=d78d8653
+```
+
+The parameter _produto_ refers to property _codigo_ from list stock products 
+
