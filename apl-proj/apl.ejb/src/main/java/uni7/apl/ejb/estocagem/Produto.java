@@ -1,4 +1,4 @@
-package uni7.apl.ejb;
+package uni7.apl.ejb.estocagem;
 import java.io.Serializable;
 
 public class Produto implements Serializable {

@@ -1,6 +1,11 @@
-package uni7.apl.web;
+package uni7.apl.web.util;
+
 public enum Acao {
-	LISTAR("listar");
+	LISTAR("listar"),
+	FINALIZAR("finalizar"),
+	ESVAZIAR("esvaziar"),
+	REMOVER("remover"),
+	ADICIONAR("adicionar");
 	
 	private final String text;
 	

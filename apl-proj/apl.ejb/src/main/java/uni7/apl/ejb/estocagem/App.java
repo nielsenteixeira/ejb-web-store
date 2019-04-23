@@ -1,4 +1,4 @@
-package uni7.apl.ejb;
+package uni7.apl.ejb.estocagem;
 
 /**
  * Hello world!

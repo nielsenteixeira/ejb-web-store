@@ -1,4 +1,4 @@
-package uni7.apl.web;
+package uni7.apl.web.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,7 +14,12 @@ import org.apache.http.HttpStatus;
 
 import com.google.gson.Gson;
 
-import uni7.apl.ejb.Produto;
+import uni7.apl.ejb.estocagem.Produto;
+import uni7.apl.web.controller.EstoqueController;
+import uni7.apl.web.util.Acao;
+import uni7.apl.web.util.FormatoResposta;
+import uni7.apl.web.util.HtmlBuilder;
+import uni7.apl.web.util.RequestOptions;
 
 @WebServlet("/EstoqueServlet")
 public class EstoqueServlet extends HttpServlet {
@@ -24,9 +29,10 @@ public class EstoqueServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().invalidate();
+		RequestOptions requestOptions = new RequestOptions();
 		
-		Acao acao = getAcao(request, response);
-		FormatoResposta formatoResposta = getFormatoResposta(request, response);
+		Acao acao = requestOptions.getAcao(request, response);
+		FormatoResposta formatoResposta = requestOptions.getFormatoResposta(request, response);
 		
 		PrintWriter out = response.getWriter();
 		
@@ -43,7 +49,7 @@ public class EstoqueServlet extends HttpServlet {
 		        
 			} else {
 				HtmlBuilder htmlBuilder = new HtmlBuilder();
-				String htmlProdutos = htmlBuilder.buildHtmlList(produtos);
+				String htmlProdutos = htmlBuilder.buildHtmlList("Estoque", produtos);
 				out.print(htmlProdutos);
 			}
 			
@@ -51,29 +57,5 @@ public class EstoqueServlet extends HttpServlet {
 		}
 		
 		out.flush();
-	}
-
-	private FormatoResposta getFormatoResposta(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		if (request.getParameter("formato") != null) {
-			try	{
-				return FormatoResposta.valueOf(request.getParameter("formato").toUpperCase());
-			} catch (IllegalArgumentException e) {
-				response.sendError(HttpStatus.SC_BAD_REQUEST, "Escolha um formato válido: 'json' ou 'html'.");
-			}
-		} 
-		
-		return FormatoResposta.HTML;
-	}
-	
-	private Acao getAcao(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		if (request.getParameter("acao") != null) {
-			try {
-				return Acao.valueOf(request.getParameter("acao").toUpperCase());
-			} catch (IllegalArgumentException e) {
-				response.sendError(HttpStatus.SC_BAD_REQUEST, "Escolha uma ação válida: 'listar'.");
-			}
-		} 
-		
-		return Acao.LISTAR;
 	}
 }

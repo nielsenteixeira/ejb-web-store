@@ -1,4 +1,4 @@
-package uni7.apl.web;
+package uni7.apl.web.util;
 
 public enum FormatoResposta {
 	JSON("json"),
