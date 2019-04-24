@@ -28,7 +28,7 @@ public class EstoqueServlet extends HttpServlet {
 	@Inject EstoqueController controller;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().invalidate();
+		//request.getSession().invalidate();
 		RequestOptions requestOptions = new RequestOptions();
 		
 		Acao acao = requestOptions.getAcao(request, response);

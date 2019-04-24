@@ -43,6 +43,8 @@ public class CarrinhoServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		HtmlBuilder htmlBuilder = new HtmlBuilder();
 		
+		String codigoProduto;
+		
 		switch (acao) {
 			case LISTAR:
 				List<Produto> produtos = carrinhoController.listarProdutos();
@@ -59,7 +61,7 @@ public class CarrinhoServlet extends HttpServlet {
 				break;
 			
 			case ADICIONAR:
-				String codigoProduto = request.getParameter("produto");
+				codigoProduto = request.getParameter("produto");
 				
 				if(codigoProduto == null) {
 					response.sendError(HttpStatus.SC_UNPROCESSABLE_ENTITY, "Código de produto inválido!");
@@ -82,8 +84,27 @@ public class CarrinhoServlet extends HttpServlet {
 						response.sendError(HttpStatus.SC_UNPROCESSABLE_ENTITY, "Produto não existe no estoque!");
 					}
 				}
+				break;
+			case REMOVER:
+				codigoProduto = request.getParameter("produto");
 				
-		}
+				if(codigoProduto == null) {
+					response.sendError(HttpStatus.SC_BAD_REQUEST, "Código de produto inválido!");
+				} else {
+					Produto produto = new Produto(codigoProduto);
+					List<Produto> produtosNoCarrinho = carrinhoController.removerItem(produto);
+					
+					if(formatoResposta == FormatoResposta.JSON) {
+						String produtosJson = formatToJSON(produtosNoCarrinho, response);
+				        out.print(produtosJson);
+				        
+					} else {
+						String htmlProdutos = htmlBuilder.buildHtmlList("Carrinho", produtosNoCarrinho);
+						out.print(htmlProdutos);
+					}
+				}
+				break;
+			}
 		
 		out.flush();
 	}

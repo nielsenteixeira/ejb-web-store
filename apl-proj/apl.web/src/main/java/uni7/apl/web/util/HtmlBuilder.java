@@ -31,9 +31,9 @@ public class HtmlBuilder {
 			this.html.append("<ul>");
 			produtos.forEach(produto -> {
 				this.html.append("<li>");
+				this.html.append("Código: " + produto.getCodigo() + " | ");
 				this.html.append("Produto: " + produto.getNome() + " | ");
 				this.html.append("Descricao: " + produto.getDescricao() + " | ");
-				this.html.append("Código: " + produto.getCodigo() + " | ");
 				this.html.append("Preço: " + produto.getPreco() + " | ");
 				this.html.append("Nome: " + produto.getNome() + " | ");
 				this.html.append("</li>");
