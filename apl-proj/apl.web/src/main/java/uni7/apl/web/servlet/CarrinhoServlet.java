@@ -19,6 +19,7 @@ import org.apache.http.HttpStatus;
 
 import com.google.gson.Gson;
 
+import uni7.apl.ejb.compra.Carrinho;
 import uni7.apl.ejb.estocagem.Produto;
 import uni7.apl.web.controller.CarrinhoController;
 import uni7.apl.web.controller.EstoqueController;
@@ -104,6 +105,20 @@ public class CarrinhoServlet extends HttpServlet {
 					}
 				}
 				break;
+				
+			
+			case ESVAZIAR:
+					carrinhoController.esvaziarCarrinho();
+					out.print("<html><body><h3>Carrinho esvaziado!</h3></body</html>");
+				break;
+				
+			case FINALIZAR:
+					Carrinho carrinho = carrinhoController.finalizarCompra();
+					String htmlCompra = htmlBuilder.buildHtmlCarrinho(carrinho);
+					carrinho.esvaziarCarrinho();
+					out.print(htmlCompra);
+				break;
+			
 			}
 		
 		out.flush();

@@ -40,7 +40,6 @@ public class CarrinhoBean implements Carrinho, Serializable {
 	
 	@Override
 	public Carrinho finalizarCompra() {
-		this.produtos.clear();
 		this.compraFinalizada = true;
 		this.valorTotalCompra = getPrecoCompra();
 		return this;
