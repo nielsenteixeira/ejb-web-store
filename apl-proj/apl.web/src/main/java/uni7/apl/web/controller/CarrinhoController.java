@@ -6,9 +6,13 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import uni7.apl.ejb.compra.Carrinho;
 import uni7.apl.ejb.estocagem.Produto;
+import uni7.apl.web.exception.ReposicaoEstoqueException;
 
 @SessionScoped
 public class CarrinhoController implements Serializable {
@@ -17,7 +21,32 @@ public class CarrinhoController implements Serializable {
 	@EJB
 	Carrinho carrinho;
 	
-	public Carrinho finalizarCompra() {
+	@Inject EstoqueController estoqueController;
+	
+	public Carrinho finalizarCompra() throws ReposicaoEstoqueException {
+		for(Produto produto: carrinho.listarProdutos()) {
+			
+			long quantidadeEmEstoque = estoqueController.getEstoque()
+					.stream()
+					.filter(produtoEmEstoque -> produto.getCodigo().equals(produtoEmEstoque.getCodigo()))
+					.count();
+			
+			long quantidadeNoCarrinho = carrinho.listarProdutos()
+					.stream()
+					.filter(produtoNoCarrinho -> produto.getCodigo().equals(produtoNoCarrinho.getCodigo()))
+					.count();
+			
+			if((quantidadeEmEstoque <= quantidadeNoCarrinho) || quantidadeEmEstoque < 2) {
+				try {
+					long quantidadeReposicao = quantidadeNoCarrinho + 2;
+					estoqueController.efetuaPedidoReposicao(produto.getCodigo(), quantidadeReposicao);
+				}catch (JsonProcessingException e) {
+					throw new ReposicaoEstoqueException("Falha ao efetuar pedido de reposição de estoque!");
+				}
+				
+			}
+		}
+				
 		return this.carrinho.finalizarCompra();
 	}
 	public void esvaziarCarrinho() {

@@ -37,6 +37,12 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+		    <groupId>org.jboss.spec.javax.jms</groupId>
+		    <artifactId>jboss-jms-api_2.0_spec</artifactId>
+		    <version>1.0.2.Final</version>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
 		    <version>2.8.5</version>
@@ -53,9 +59,20 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.8</version>
+		</dependency>		
+		<dependency>
 			<groupId>uni7.apl.ejb</groupId>
 			<artifactId>apl.ejb</artifactId>
 			<version>1.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jboss.spec.javax.jms</groupId>
+		    <artifactId>jboss-jms-api_2.0_spec</artifactId>
+		    <version>1.0.2.Final</version>
+		    <scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>

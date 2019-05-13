@@ -87,7 +87,4 @@ public class CarrinhoBean implements Carrinho, Serializable {
 				.stream()
 				.mapToDouble(p -> p.getPreco()).sum();
 	}
-
-	
-	
 }

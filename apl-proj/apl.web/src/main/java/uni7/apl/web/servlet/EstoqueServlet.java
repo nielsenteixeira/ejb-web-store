@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.HttpStatus;
-
 import com.google.gson.Gson;
 
 import uni7.apl.ejb.estocagem.Produto;
@@ -53,6 +51,9 @@ public class EstoqueServlet extends HttpServlet {
 				out.print(htmlProdutos);
 			}
 			
+			break;
+		default:
+			out.print("Escolha uma ação válida!");
 			break;
 		}
 		

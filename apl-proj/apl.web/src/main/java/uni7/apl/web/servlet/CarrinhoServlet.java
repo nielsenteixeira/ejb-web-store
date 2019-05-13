@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +20,7 @@ import uni7.apl.ejb.compra.Carrinho;
 import uni7.apl.ejb.estocagem.Produto;
 import uni7.apl.web.controller.CarrinhoController;
 import uni7.apl.web.controller.EstoqueController;
+import uni7.apl.web.exception.ReposicaoEstoqueException;
 import uni7.apl.web.util.Acao;
 import uni7.apl.web.util.FormatoResposta;
 import uni7.apl.web.util.HtmlBuilder;
@@ -113,10 +111,15 @@ public class CarrinhoServlet extends HttpServlet {
 				break;
 				
 			case FINALIZAR:
-					Carrinho carrinho = carrinhoController.finalizarCompra();
-					String htmlCompra = htmlBuilder.buildHtmlCarrinho(carrinho);
-					carrinho.esvaziarCarrinho();
-					out.print(htmlCompra);
+					try {
+						Carrinho carrinho = carrinhoController.finalizarCompra();
+						String htmlCompra = htmlBuilder.buildHtmlCarrinho(carrinho);
+						carrinho.esvaziarCarrinho();
+						out.print(htmlCompra);
+					} catch (ReposicaoEstoqueException e) {
+						out.print("Falha ao tentar finalizar compra. Por favor tente novamente!");
+					}
+					
 				break;
 			
 			}

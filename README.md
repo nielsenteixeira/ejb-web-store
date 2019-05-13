@@ -86,5 +86,18 @@ To add an item into cart access this url:
 http://localhost:8080/apl.web/CarrinhoServlet?acao=adicionar&produto=d78d8653
 ```
 
-The parameter _produto_ refers to property _codigo_ from list stock products 
+The parameter _produto_ refers to property _codigo_ from list stock products
 
+To finalize the purchase:
+
+```
+http://localhost:8080/apl.web/CarrinhoServlet?acao=finalizar
+```
+
+At the end of the purchase the system sends a request to the replenishment queue where the algorithm is: minimum quantity required for product in stock + 2
+
+After that, just check the quantity in stock again
+
+```
+http://localhost:8080/apl.web/EstoqueServlet?acao=listar
+```
