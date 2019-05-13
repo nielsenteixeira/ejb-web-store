@@ -41,16 +41,21 @@ ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 
 WORKDIR /workspace/
 
+ARG CACHEBUST=1
+
 COPY pom.xml .
 COPY apl.ear apl.ear
 COPY apl.ejb apl.ejb
 COPY apl.web apl.web
 COPY src src
 
-RUN mvn package
+#CMD ["sudo systemctl status wildfly"]
 
-COPY ["apl.ear/target/apl.ear-1.0.ear", "/opt/jboss/wildfly/standalone/deployments/apl.ear-1.0.ear"]
 
-USER jboss
+#COPY apl.ear/target/apl.ear-1.0.ear /opt/jboss/wildfly/standalone/deployments/apl.ear-1.0.ear
 
-ENTRYPOINT ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
+#USER jboss
+
+
+#CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
+CMD ["mvn wildfly:deploy"]

@@ -49,21 +49,21 @@ JSON return:
 ```JSON
 [
     {
-        id: 1,
+        quantidade: 1,
         codigo: "d78d8653",
         nome: "Geladeira Brastemp",
         descricao: "Geladeira Brastemp 450L",
         preco: 2500
     },
     {
-        id: 6,
+        quantidade: 6,
         codigo: "9b456dcc",
         nome: "Freezer",
         descricao: "Freezer 300L",
         preco: 1600
     },
     {
-        id: 7,
+        quantidade: 7,
         codigo: "9599fafa",
         nome: "TV 50'",
         descricao: "TV 50' 4K",
